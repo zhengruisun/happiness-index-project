@@ -1,10 +1,21 @@
 import React from 'react';
-import { NavLink } from 'react-'
+import { NavLink } from 'react-router-dom'
 export function LandingPage(props) {
     return (
         <main>
             <section className='intro-text'>
-                <LandingHeader />
+                <header>
+                    <LandingHeader />
+                </header>
+            </section>
+            <section>
+                    <LandingData />
+            </section>
+            <section>
+                <LandingInfo />
+            </section>
+            <section className='galary center'>
+                <LandingGalary />
             </section>
         </main>
     );
@@ -17,7 +28,9 @@ export function LandingHeader(props) {
                 <div className='col'>
                     <LandingTitle />
                     <LandingDescription />
+                    <LandingButton />
                 </div>
+                <LandingIntroImg />
             </div>
         </div>
     );
@@ -57,5 +70,111 @@ export function LandingDescription(props) {
 }
 
 export function LandingButton(props) {
+    return (
+        <div className='row'>
+            <NavLink exact to='/' role='button'>
+                <button href="index.html" aria-label="Button for moving to data analysis page">
+                    <span>Explore more</span>
+                </button>
+            </NavLink>
+        </div>
+    );
+}
 
+export function LandingIntroImg(props) {
+    return (
+        <div className='col intro-img'>
+            <img class="intro-img" src="img/happy-child.jpg" alt="a happy child"></img>
+        </div>
+    );
+}
+
+export function LandingData(props) {
+    return (
+        <div className='data container'>
+            <div className="row">
+                <div className="col">
+                    <p>155</p>
+                    <p>Countries with Happiness Index</p>
+                </div>
+                <div className="col">
+                    <p>7 Billion +</p>
+                    <p>Individuals from the World</p>
+                </div>
+                <div className="col">
+                    <p>7 +</p>
+                    <p>Factors of Happiness</p>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export function LandingInfo(props) {
+    return (
+        <div>
+            <div class="container center">
+                <div class="row">
+                    <div class="col">
+                        <h2>
+                            Happiness can change, and does change, according to the quality of the society in which
+                            people live.
+                        </h2>
+                    </div>
+                </div>
+            </div>
+            <div class="parts">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <h3>Physical</h3>
+                            <p>
+                                Laugh is the most beautiful and natural excercise. According to
+                                modern scientific report, laughter is an activity beneficial to the human
+                                body. A laugh can make the diaphragm, chest, abdomen, heart, lungs, and even 
+                                the liver in the human body receive exercise, and laugh can relax the
+                                muscles of the whole body. </p>
+    
+                        </div>
+                        <div class="col">
+                            <h3>Mental</h3>
+                            <p>
+                                Happiness will produce a substance called dopamine. The latest research by
+                                scientists shows that this substance is also very important for human
+                                intelligence.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export function LandingGalary(props) {
+    return (
+        <div>
+            <div class="container">
+                <h2>Happiness Galary</h2>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <img src="img/happy-couple.jpg" alt="a happy family">
+                    </div>
+                    <div class="col">
+                        <img src="img/happy-kid.jpg" alt="a happy kid with his dog">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <img src="img/happy-man.jpg" alt="a happy man in red shirt">
+                    </div>
+                    <div class="col">
+                        <img src="img/happy-people.jpg" alt="two happy friends">
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 }
