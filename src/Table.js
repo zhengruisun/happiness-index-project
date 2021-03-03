@@ -38,6 +38,7 @@ function TableRow(props) {
 
 function TableBody(props) {
     let rows = props.rows;
+
     rows = rows.map((row) => {
         return (<TableRow row={row} />);
     });
@@ -48,24 +49,51 @@ function TableBody(props) {
     );
 }
 
-function TableBotton() {
-    const handlePrevious = () => {
-
-    }
-
-    const handleNext = () => {
-
-    }
-
+function TableBotton(props) {
     return (
         <div className='table-footer'>
-            <button className='submit-button' onClick={handlePrevious}>Previous</button>
-            <button className='submit-button' onClick={handleNext}>Next</button>
+            <button className='submit-button' onClick={() => { props.callbackFunc('previous'); }}>Previous</button>
+            <button className='submit-button' onClick={() => { props.callbackFunc('next'); }}>Next</button>
         </div>
     );
 }
 
 export function Table(props) {
     let headers = props.data[0];
-    let 
+    let countryCondition = props.countryCondition;
+    let pageNum = props.pageNum;
+    let parsedData = [];
+
+    let pageGap = 15;
+
+    for (let row of props.data.shift()) {
+        if (countryCondition != undefined) {
+            if (row[0] == countryCondition) {
+                parsedData.push(row);
+            }
+        } else {
+            parsedData.push(row);
+        }
+    }
+ 
+    if (props.data.shift().length < 1) {
+        return (
+            <div className='table data-table-frame'>
+                <table className='data-table'>
+                    <TableHeader headers={headers} />
+                </table>
+                <div className="alerts"><p>No data, please check you input!</p></div> 
+            </div>
+        );
+    } else {
+        return (
+            <div className='table data-table-frame'>
+                <table className='data-table'>
+                    <TableHeader headers={headers} />
+                    <TableBody rows={parsedData.slice(pageNum * pageGap, (pageNum + 1) * pageGap)} />
+                </table>
+                <TableBotton callbackFunc={props.handlePageNumClick} />
+            </div>
+        );
+    }
 }
