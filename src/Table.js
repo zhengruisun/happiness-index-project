@@ -67,7 +67,7 @@ export function Table(props) {
     let pageGap = 15;
 
     for (let row of props.data.shift()) {
-        if (countryCondition != undefined) {
+        if (countryCondition != '') {
             if (row[0] == countryCondition) {
                 parsedData.push(row);
             }
