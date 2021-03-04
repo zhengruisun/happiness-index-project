@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { LandingPage } from './LandingPage';
 import { IndexTablePage } from './IndexTablePage';
+import { IndexCardsPage } from './IndexCardsPage';
 import { Route, Switch, Link, Redirect, NavLink } from 'react-router-dom';
+
+import './style.css';
 
 export function App(pros) {
     // const
@@ -12,6 +15,7 @@ export function App(pros) {
                 <Switch>
                     <Route exact path="/landing" component={LandingPage} />
                     <Route exact path="/table" component={IndexTablePage} />
+                    <Route exact path="/cards" component={IndexCardsPage} />
                 </Switch>
             </main>
             <Footer />
@@ -39,3 +43,5 @@ function Footer() {
         </footer>
     );
 }
+
+export default App;
