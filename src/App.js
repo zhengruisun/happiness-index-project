@@ -4,7 +4,6 @@ import { IndexTablePage } from './IndexTablePage';
 import { IndexCardsPage } from './IndexCardsPage';
 import { Route, Switch, Link, Redirect, NavLink } from 'react-router-dom';
 
-import './style.css';
 
 export function App(pros) {
     // const
@@ -23,11 +22,33 @@ export function App(pros) {
     );
 }
 
-function NavBar() {
-    return (
-        <section>
+function NavBar(props) {
+    const [isOpen, setIsOpen] = useState(false);
 
-        </section>
+   const toggle = () => setIsOpen(!isOpen);
+    return (
+        <div>
+            <Navbar color="light" light expand="md">
+            <NavbarToggler onClick={toggle} />
+         <Collapse isOpen={isOpen} navbar>
+          <Nav className="me-auto" navbar>
+          <UncontrolledDropdown nav inNavbar>
+              <DropdownToggle nav caret>
+                Happiness Index Data
+              </DropdownToggle>
+              <DropdownMenu right>
+                <DropdownItem>
+                  Country Cards
+                </DropdownItem>
+                <DropdownItem>
+                  Data Table
+                </DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
+          </Nav>
+          </Collapse>
+            </Navbar>
+        </div>
     );
 }
 
