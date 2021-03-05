@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
 import { LandingPage } from './LandingPage';
 import { IndexTablePage } from './IndexTablePage';
-import { IndexCardsPage } from './IndexCardsPage';
+//import { IndexCardsPage } from './IndexCardsPage';
 import { Route, Switch, Link, Redirect, NavLink } from 'react-router-dom';
+import { Collapse, NavbarToggler, UncontrolledDropdown, DropdownMenu, DropdownItem, Navbar, DropdownToggle, Nav } from 'reactstrap';
 
 
-export function App(pros) {
+export function App(props) {
     // const
     return (
         <div>
-            <Navbar />
+            <NavBar />
             <main>
                 <Switch>
                     <Route exact path="/landing" component={LandingPage} />
                     <Route exact path="/table" component={IndexTablePage} />
-                    <Route exact path="/cards" component={IndexCardsPage} />
+                    {/* {<Route exact path="/cards" component={IndexCardsPage} />} */}
                 </Switch>
             </main>
             <Footer />

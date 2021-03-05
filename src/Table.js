@@ -23,7 +23,7 @@ function TableHeader(props) {
 function TableRow(props) {
     let row = props.row;
     row = row.map((elem) => {
-        if (HIDE_INDEX.includes(rows.indexOf(elem))) {
+        if (HIDE_INDEX.includes(row.indexOf(elem))) {
             return (<td className="hide-mobile">{elem}</td>);
         } else {
             return (<td>{elem}</td>);
@@ -31,7 +31,7 @@ function TableRow(props) {
     });
     return (
         <tr>
-            {rows}
+            {row}
         </tr>
     );
 }
@@ -66,17 +66,19 @@ export function Table(props) {
 
     let pageGap = 15;
 
-    for (let row of props.data.shift()) {
-        if (countryCondition != '') {
-            if (row[0] == countryCondition) {
+    if (props.data.length != 0) {
+        for (let row of props.data.shift()) {
+            if (countryCondition != '') {
+                if (row[0] == countryCondition) {
+                    parsedData.push(row);
+                }
+            } else {
                 parsedData.push(row);
             }
-        } else {
-            parsedData.push(row);
         }
     }
  
-    if (props.data.shift().length < 1) {
+    if (props.data.length < 2) {
         return (
             <div className='table data-table-frame'>
                 <table className='data-table'>

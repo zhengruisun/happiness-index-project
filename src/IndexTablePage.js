@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table } from './Table';
 
 function YearSelect(props) {
@@ -15,7 +15,7 @@ function YearSelect(props) {
 
     return (
         <form className="select-input" onSubmit={handleSubmit} role="listbox" aria-label="list of selections of areas">
-            <label for="years"><h3>Select A Year:</h3></label>
+            <label htmlFor="years"><h3>Select A Year:</h3></label>
             <select name="years" value={selectValue} onChange={handleChange}>
                 <option value="2015">2015</option>
                 <option value="2016">2016</option>
@@ -41,7 +41,7 @@ function CountrySelect(props) {
 
     return (
         <form className="text-input" onSubmit={handleSubmit} role="textbox" aria-label="textbox for selecting country for the table">
-            <label for="country-for-table">
+            <label htmlFor="country-for-table">
                 <h3>Find A Country:</h3>
             </label>
             <p>Get the data from 2015 to 2019.</p>
@@ -84,8 +84,8 @@ export function IndexTablePage() {
     let [data, setData] = useState([]);
     let [isLoaded, setLoaded] = useState(false);
 
-    if (!isLoaded) {
-        let url = 'data' + yearState + '.csv';
+    const getData = () => {
+        let url = 'data/' + yearState + '.csv';
         fetch(url)
         .then(function(response) {
             if (response.ok) {
@@ -101,18 +101,25 @@ export function IndexTablePage() {
             }
             // remove the last empty element
             out.pop();
-            setData(out);
+            console.log(out);
             setLoaded(true);
+            setData(out);
         })
         .catch(function(err) {
             setLoaded(true);
-        })
+        });
     }
-    
+
+    useEffect(getData); 
+
+    console.log(data);
+    console.log(isLoaded);
+
     const handlePageNumClick = (operation) => {
+        let pageGap = 15;
         let updatedPageNum = pageNum;
         if (operation == 'next') {
-            let maxLimit = Math.ceil((props.data.length - 1) / pageGap);
+            let maxLimit = Math.ceil((data.length - 1) / pageGap);
             updatedPageNum += 1;
             if (updatedPageNum >= maxLimit) {
                 updatedPageNum = maxLimit - 1;

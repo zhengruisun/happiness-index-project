@@ -160,18 +160,18 @@ export function LandingGalary(props) {
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <img src="img/happy-couple.jpg" alt="a happy family">
+                        <img src="img/happy-couple.jpg" alt="a happy family"></img>
                     </div>
                     <div class="col">
-                        <img src="img/happy-kid.jpg" alt="a happy kid with his dog">
+                        <img src="img/happy-kid.jpg" alt="a happy kid with his dog"></img>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <img src="img/happy-man.jpg" alt="a happy man in red shirt">
+                        <img src="img/happy-man.jpg" alt="a happy man in red shirt"></img>
                     </div>
                     <div class="col">
-                        <img src="img/happy-people.jpg" alt="two happy friends">
+                        <img src="img/happy-people.jpg" alt="two happy friends"></img>
                     </div>
                 </div>
             </div>
