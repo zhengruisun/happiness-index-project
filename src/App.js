@@ -13,6 +13,7 @@ export function App(props) {
             <NavBar />
             <main>
                 <Switch>
+                    <Route exact path="/" component={LandingPage} />
                     <Route exact path="/landing" component={LandingPage} />
                     <Route exact path="/table" component={IndexTablePage} />
                     {/* {<Route exact path="/cards" component={IndexCardsPage} />} */}
@@ -24,32 +25,24 @@ export function App(props) {
 }
 
 function NavBar(props) {
-    const [isOpen, setIsOpen] = useState(false);
 
-   const toggle = () => setIsOpen(!isOpen);
     return (
-        <div>
-            <Navbar color="light" light expand="md">
-            <NavbarToggler onClick={toggle} />
-         <Collapse isOpen={isOpen} navbar>
-          <Nav className="me-auto" navbar>
-          <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                Happiness Index Data
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>
-                  Country Cards
-                </DropdownItem>
-                <DropdownItem>
-                  Data Table
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
-          </Nav>
-          </Collapse>
-            </Navbar>
-        </div>
+        <section>
+            <nav className="fixed-top">
+                <div className="nav-left">
+                    <span className="logo" aria-hidden="true">&nbsp;</span><a className="hide-mobile">World Happiness</a>
+                    <NavLink className="nav-text" exact to="/">Home</NavLink>
+                    <NavLink className="nav-text" to="/cards">DataCards</NavLink>
+                    <NavLink className="nav-text" to="/table">DataTable</NavLink>
+                </div>
+                <div className="nav-right">
+                    <a href="index.html" role="button"><button aria-label="button for sign up"><span>Sign
+                                Up</span></button></a>
+                    <a href="index.html" role="button"><button aria-label="button for log in"><span>Log
+                            In</span></button></a>
+                </div>
+            </nav>
+        </section>
     );
 }
 

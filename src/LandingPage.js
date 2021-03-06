@@ -1,6 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom'
-export function LandingPage(props) {
+
+
+export function LandingPage() {
     return (
         <main>
             <section className='intro-text'>
@@ -21,7 +23,7 @@ export function LandingPage(props) {
     );
 }
 
-export function LandingHeader(props) {
+export function LandingHeader() {
     return (
         <div className='container'>
             <div className='row'>
@@ -36,7 +38,7 @@ export function LandingHeader(props) {
     );
 }
 
-export function LandingTitle(props) {
+export function LandingTitle() {
     return (
         <div>
             <div className='row'>
@@ -49,7 +51,7 @@ export function LandingTitle(props) {
     );
 }
 
-export function LandingDescription(props) {
+export function LandingDescription() {
     return (
         <div className='description'>
             <div className='row'>
@@ -69,7 +71,7 @@ export function LandingDescription(props) {
     );
 }
 
-export function LandingButton(props) {
+export function LandingButton() {
     return (
         <div className='row'>
             <NavLink exact to='/' role='button'>
@@ -81,7 +83,7 @@ export function LandingButton(props) {
     );
 }
 
-export function LandingIntroImg(props) {
+export function LandingIntroImg() {
     return (
         <div className='col intro-img'>
             <img className="intro-img" src="img/happy-child.jpg" alt="a happy child"></img>
@@ -89,7 +91,7 @@ export function LandingIntroImg(props) {
     );
 }
 
-export function LandingData(props) {
+export function LandingData() {
     return (
         <div className='data container'>
             <div className="row">
@@ -110,7 +112,7 @@ export function LandingData(props) {
     );
 }
 
-export function LandingInfo(props) {
+export function LandingInfo() {
     return (
         <div>
             <div className="container center">
@@ -151,7 +153,7 @@ export function LandingInfo(props) {
     );
 }
 
-export function LandingGalary(props) {
+export function LandingGalary() {
     return (
         <div>
             <div className="container">
