@@ -4,11 +4,14 @@ let HIDE_INDEX = [4, 5, 6 ,7];
 
 function TableHeader(props) {
     let headers = props.headers;
+    if (headers == undefined) {
+        headers = [];
+    }
     let headerRow = headers.map((header) => {
         if (HIDE_INDEX.includes(headers.indexOf(header))) {
-            return (<td className="hide-mobile">{header}</td>);
+            return (<td key={header} className="hide-mobile">{header}</td>);
         } else {
-            return (<td>{header}</td>);
+            return (<td key={header}>{header}</td>);
         }
     });
     return (
@@ -24,9 +27,9 @@ function TableRow(props) {
     let row = props.row;
     row = row.map((elem) => {
         if (HIDE_INDEX.includes(row.indexOf(elem))) {
-            return (<td className="hide-mobile">{elem}</td>);
+            return (<td className="hide-mobile" key={elem}>{elem}</td>);
         } else {
-            return (<td>{elem}</td>);
+            return (<td key={elem}>{elem}</td>);
         }
     });
     return (
@@ -40,7 +43,7 @@ function TableBody(props) {
     let rows = props.rows;
 
     rows = rows.map((row) => {
-        return (<TableRow row={row} />);
+        return (<TableRow row={row} key={row[0]} />);
     });
     return (
         <tbody>
@@ -63,13 +66,14 @@ export function Table(props) {
     let countryCondition = props.countryCondition;
     let pageNum = props.pageNum;
     let parsedData = [];
-
     let pageGap = 15;
 
-    if (props.data.length != 0) {
-        for (let row of props.data.shift()) {
-            if (countryCondition != '') {
-                if (row[0] == countryCondition) {
+    let data = props.data.slice(pageNum * pageGap, (pageNum + 1) * pageGap);
+
+    if (data.length != 0) {
+        for (let row of data) {
+            if (countryCondition !== '') {
+                if (row[0] === countryCondition) {
                     parsedData.push(row);
                 }
             } else {
@@ -92,7 +96,7 @@ export function Table(props) {
             <div className='table data-table-frame'>
                 <table className='data-table'>
                     <TableHeader headers={headers} />
-                    <TableBody rows={parsedData.slice(pageNum * pageGap, (pageNum + 1) * pageGap)} />
+                    <TableBody rows={parsedData} countryCondition={props.countryCondition} />
                 </table>
                 <TableBotton callbackFunc={props.handlePageNumClick} />
             </div>

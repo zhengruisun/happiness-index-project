@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Table } from './Table';
+import 'whatwg-fetch';
 
 function YearSelect(props) {
     let [selectValue, setSelect] = useState('2015');
@@ -71,8 +72,8 @@ function LeftSubpage(props) {
 
 function MidSubpage(props) {
     return (
-        <section class="mid-subpage">
-            <Table data={props.data} />
+        <section className="mid-subpage">
+            <Table data={props.data} handlePageNumClick={props.handlePageNumClick} pageNum={props.pageNum} countryCondition={props.countryCondition} />
         </section>
     );
 }
@@ -82,9 +83,8 @@ export function IndexTablePage() {
     let [yearState, setYearState] = useState('2015');
     let [countryState, setCountryState] = useState('');
     let [data, setData] = useState([]);
-    let [isLoaded, setLoaded] = useState(false);
 
-    const getData = () => {
+    useEffect(() => {
         let url = 'data/' + yearState + '.csv';
         fetch(url)
         .then(function(response) {
@@ -101,19 +101,9 @@ export function IndexTablePage() {
             }
             // remove the last empty element
             out.pop();
-            console.log(out);
-            setLoaded(true);
             setData(out);
-        })
-        .catch(function(err) {
-            setLoaded(true);
         });
-    }
-
-    useEffect(getData); 
-
-    console.log(data);
-    console.log(isLoaded);
+    }, []); 
 
     const handlePageNumClick = (operation) => {
         let pageGap = 15;
@@ -142,10 +132,9 @@ export function IndexTablePage() {
     }
 
     return (
-        <div class="container pages">
+        <div className="container pages">
             <LeftSubpage handleYearSubmit={handleYearSubmit} handleCountrySubmit={handleCountrySubmit} />
-            <MidSubpage countryCondition={countryState} data={data} handlePageNumClick={handlePageNumClick} />
+            <MidSubpage countryCondition={countryState} data={data} handlePageNumClick={handlePageNumClick} pageNum={pageNum} />
         </div>
     );
-
 }

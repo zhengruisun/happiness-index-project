@@ -58,7 +58,7 @@ export function LandingDescription(props) {
                     We provide information and data visualization for people to have a deeper understanding of each country.
                 </p>
             </div>
-            <div class="row">
+            <div className="row">
                 <p>
                     People will gain a better insight on the correlation between happiness indices
                     and different factors of the country, so that they can publish their studies 
@@ -84,7 +84,7 @@ export function LandingButton(props) {
 export function LandingIntroImg(props) {
     return (
         <div className='col intro-img'>
-            <img class="intro-img" src="img/happy-child.jpg" alt="a happy child"></img>
+            <img className="intro-img" src="img/happy-child.jpg" alt="a happy child"></img>
         </div>
     );
 }
@@ -113,9 +113,9 @@ export function LandingData(props) {
 export function LandingInfo(props) {
     return (
         <div>
-            <div class="container center">
-                <div class="row">
-                    <div class="col">
+            <div className="container center">
+                <div className="row">
+                    <div className="col">
                         <h2>
                             Happiness can change, and does change, according to the quality of the society in which
                             people live.
@@ -123,10 +123,10 @@ export function LandingInfo(props) {
                     </div>
                 </div>
             </div>
-            <div class="parts">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
+            <div className="parts">
+                <div className="container">
+                    <div className="row">
+                        <div className="col">
                             <h3>Physical</h3>
                             <p>
                                 Laugh is the most beautiful and natural excercise. According to
@@ -136,7 +136,7 @@ export function LandingInfo(props) {
                                 muscles of the whole body. </p>
     
                         </div>
-                        <div class="col">
+                        <div className="col">
                             <h3>Mental</h3>
                             <p>
                                 Happiness will produce a substance called dopamine. The latest research by
@@ -154,23 +154,23 @@ export function LandingInfo(props) {
 export function LandingGalary(props) {
     return (
         <div>
-            <div class="container">
+            <div className="container">
                 <h2>Happiness Galary</h2>
             </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col">
+            <div className="container">
+                <div className="row">
+                    <div className="col">
                         <img src="img/happy-couple.jpg" alt="a happy family"></img>
                     </div>
-                    <div class="col">
+                    <div className="col">
                         <img src="img/happy-kid.jpg" alt="a happy kid with his dog"></img>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col">
+                <div className="row">
+                    <div className="col">
                         <img src="img/happy-man.jpg" alt="a happy man in red shirt"></img>
                     </div>
-                    <div class="col">
+                    <div className="col">
                         <img src="img/happy-people.jpg" alt="two happy friends"></img>
                     </div>
                 </div>
