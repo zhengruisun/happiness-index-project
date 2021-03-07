@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Card, CardTitle, CardText, Dropdown, DropdownToggle, DropdownItem, DropdownMenu } from 'reactstrap';
+import { Dropdown, DropdownToggle, DropdownItem, DropdownMenu } from 'reactstrap';
+import {
+    Card, CardText, CardBody,
+    CardTitle, CardSubtitle, Button
+  } from 'reactstrap';
 
 export function IndexCardPage(props) {
     let [yearState, setYearState] = useState('2015');
@@ -50,7 +54,7 @@ function CardLeftSubpage(props) {
 function CardPageDescription(props) {
     return (
         <div className="tabcontent cards">
-            <h2>Top 10 Happiest Countries in the World</h2>
+            <h2>10 Happiest Countries in the World</h2>
             <p>
                 Based on the reported happniess scores, we list the 10 happiest countries around the word. From these country cards,
                 we could see that countries with the highest happiness index mostly located in Europe.
@@ -108,7 +112,14 @@ function CardMidSubpage(props) {
 function CountryCard(props) {
     return (
         <div>
-
+         <Card>
+        <CardBody>
+          <CardTitle tag="h5">Card title</CardTitle>
+          <CardSubtitle tag="h6" className="mb-2 text-muted">Card subtitle</CardSubtitle>
+          <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+          <Button>View More</Button>
+        </CardBody>
+      </Card>
         </div>
     );
 }
@@ -116,7 +127,7 @@ function CountryCard(props) {
 function CountryList(props) {
     let data = Object.entries(props.data);
     let countryCards = data.map((country) => {
-        return <CountryCard key={country[0]} data={country} />
+        return  <CountryCard key={country[0]} data={country} />
     });
     return (
         {countryCards}
