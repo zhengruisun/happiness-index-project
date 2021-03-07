@@ -49,7 +49,7 @@ nav {
 
 .logo {
     padding: 0 1em 0 1em;
-    background-image: url('../img/noun_happiness_2290052.svg');
+    background-image: url('./noun_happiness_2290052.svg');
     background-repeat: no-repeat;
     background-position: left;
     background-size: contain;
@@ -221,6 +221,15 @@ h3 {
     font-size: 30px;
 }
 
+.left-subpage input[type=text] {
+    border: 2px solid orange;
+    border-radius: 4px;
+}
+
+.left-subpage input[type=text]:focus {
+    background-color: oldlace;
+}
+
 /* Tab CSS in index for switching */
 .tab {
     overflow: hidden;
@@ -268,7 +277,6 @@ h3 {
    part in index.html, will be deleted once js
    is implemented!! */
 .table {
-    display: none;
     border: none;
 }
 
@@ -333,6 +341,49 @@ h3 {
     height: 150px;
 }
 
+@media (max-width:1200px) {
+    .galary img {
+        width: 450px;
+        height: auto;
+    }
+}
+
+@media (max-width:1080px) {
+    .data-table-frame {
+        margin-left: 0px;
+    }
+}
+
+@media (max-width:992px) {
+    /* For smaller screens or less wide windows */
+    .pages {
+        display: list-item;
+        list-style: none;
+        font-size: 1rem;
+    }
+
+    /* Special changes to each html */
+
+    .intro-img {
+        display: none;
+    }
+
+    .galary .container {
+        display: inline-block;
+    }
+
+    .galary img {
+        width: 100%;
+        height: auto;
+        margin: 10px;
+    }
+
+    .right-subpage img {
+        width: 90%;
+        height: auto;
+    }
+}
+
 @media (max-width: 666px) {
     /* Special for phones */
     /* General changings */
@@ -376,12 +427,6 @@ h3 {
         width: 95%;
     }
 
-    .galary img {
-        width: 100px;
-        height: auto;
-        
-    }
-
     .left-subpage h1 {
         font-size: 30px;
     }
@@ -392,37 +437,5 @@ h3 {
     .right-subpage {
         width: 100%;
         flex-basis: 0px;
-    }
-}
-
-@media (max-width:992px) {
-    /* For smaller screens or less wide windows */
-    .pages {
-        display: list-item;
-        list-style: none;
-        font-size: 1rem;
-    }
-
-    /* Special changes to each html */
-
-    .intro-img {
-        display: none;
-    }
-
-    .galary img {
-        max-width: 100%;
-        height: auto;
-        margin: 10px;
-    }
-
-    .right-subpage img {
-        width: 90%;
-        height: auto;
-    }
-}
-
-@media (max-width:1080px) {
-    .data-table-frame {
-        margin-left: 0px;
     }
 }

@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 let HIDE_INDEX = [4, 5, 6 ,7];
 
 function TableHeader(props) {
     let headers = props.headers;
+    if (headers == undefined) {
+        headers = [];
+    }
     let headerRow = headers.map((header) => {
         if (HIDE_INDEX.includes(headers.indexOf(header))) {
-            return (<td className="hide-mobile">{header}</td>);
+            return (<th key={header} className="hide-mobile">{header}</th>);
         } else {
-            return (<td>{header}</td>);
+            return (<th key={header}>{header}</th>);
         }
     });
     return (
@@ -23,15 +26,15 @@ function TableHeader(props) {
 function TableRow(props) {
     let row = props.row;
     row = row.map((elem) => {
-        if (HIDE_INDEX.includes(rows.indexOf(elem))) {
-            return (<td className="hide-mobile">{elem}</td>);
+        if (HIDE_INDEX.includes(row.indexOf(elem))) {
+            return (<td className="hide-mobile" key={elem}>{elem}</td>);
         } else {
-            return (<td>{elem}</td>);
+            return (<td key={elem}>{elem}</td>);
         }
     });
     return (
         <tr>
-            {rows}
+            {row}
         </tr>
     );
 }
@@ -40,7 +43,7 @@ function TableBody(props) {
     let rows = props.rows;
 
     rows = rows.map((row) => {
-        return (<TableRow row={row} />);
+        return (<TableRow row={row} key={row[0]} />);
     });
     return (
         <tbody>
@@ -63,20 +66,24 @@ export function Table(props) {
     let countryCondition = props.countryCondition;
     let pageNum = props.pageNum;
     let parsedData = [];
-
     let pageGap = 15;
 
-    for (let row of props.data.shift()) {
-        if (countryCondition != undefined) {
-            if (row[0] == countryCondition) {
+    let data = props.data.slice(1, props.data.length);
+    data = data.slice(pageNum * pageGap, (pageNum + 1) * pageGap);
+
+    if (data.length != 0) {
+        for (let row of data) {
+            if (countryCondition !== '') {
+                if (row[0] === countryCondition) {
+                    parsedData.push(row);
+                }
+            } else {
                 parsedData.push(row);
             }
-        } else {
-            parsedData.push(row);
         }
     }
  
-    if (props.data.shift().length < 1) {
+    if (data.length < 2) {
         return (
             <div className='table data-table-frame'>
                 <table className='data-table'>
@@ -85,12 +92,21 @@ export function Table(props) {
                 <div className="alerts"><p>No data, please check you input!</p></div> 
             </div>
         );
+    } else if (countryCondition !== '') {
+        return (
+            <div className='table data-table-frame'>
+                <table className='data-table'>
+                    <TableHeader headers={headers} />
+                    <TableBody rows={parsedData} countryCondition={props.countryCondition} />
+                </table>
+            </div>
+        );
     } else {
         return (
             <div className='table data-table-frame'>
                 <table className='data-table'>
                     <TableHeader headers={headers} />
-                    <TableBody rows={parsedData.slice(pageNum * pageGap, (pageNum + 1) * pageGap)} />
+                    <TableBody rows={parsedData} countryCondition={props.countryCondition} />
                 </table>
                 <TableBotton callbackFunc={props.handlePageNumClick} />
             </div>

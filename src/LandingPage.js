@@ -1,6 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom'
-export function LandingPage(props) {
+
+
+export function LandingPage() {
     return (
         <main>
             <section className='intro-text'>
@@ -21,7 +23,7 @@ export function LandingPage(props) {
     );
 }
 
-export function LandingHeader(props) {
+export function LandingHeader() {
     return (
         <div className='container'>
             <div className='row'>
@@ -36,7 +38,7 @@ export function LandingHeader(props) {
     );
 }
 
-export function LandingTitle(props) {
+export function LandingTitle() {
     return (
         <div>
             <div className='row'>
@@ -49,7 +51,7 @@ export function LandingTitle(props) {
     );
 }
 
-export function LandingDescription(props) {
+export function LandingDescription() {
     return (
         <div className='description'>
             <div className='row'>
@@ -58,7 +60,7 @@ export function LandingDescription(props) {
                     We provide information and data visualization for people to have a deeper understanding of each country.
                 </p>
             </div>
-            <div class="row">
+            <div className="row">
                 <p>
                     People will gain a better insight on the correlation between happiness indices
                     and different factors of the country, so that they can publish their studies 
@@ -69,7 +71,7 @@ export function LandingDescription(props) {
     );
 }
 
-export function LandingButton(props) {
+export function LandingButton() {
     return (
         <div className='row'>
             <NavLink exact to='/' role='button'>
@@ -81,15 +83,15 @@ export function LandingButton(props) {
     );
 }
 
-export function LandingIntroImg(props) {
+export function LandingIntroImg() {
     return (
         <div className='col intro-img'>
-            <img class="intro-img" src="img/happy-child.jpg" alt="a happy child"></img>
+            <img className="intro-img" src="img/happy-child.jpg" alt="a happy child"></img>
         </div>
     );
 }
 
-export function LandingData(props) {
+export function LandingData() {
     return (
         <div className='data container'>
             <div className="row">
@@ -110,7 +112,7 @@ export function LandingData(props) {
     );
 }
 
-export function LandingInfo(props) {
+export function LandingInfo() {
     return (
         <div>
             <div className="container center">
@@ -151,27 +153,28 @@ export function LandingInfo(props) {
     );
 }
 
-export function LandingGalary(props) {
+export function LandingGalary() {
     return (
         <div>
-            <div class="container">
+            <div className="container">
                 <h2>Happiness Galary</h2>
             </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <img src="img/happy-couple.jpg" alt="a happy family" />
+
+            <div className="container">
+                <div className="row">
+                    <div className="col">
+                        <img src="img/happy-couple.jpg" alt="a happy family"></img>
                     </div>
-                    <div class="col">
-                        <img src="img/happy-kid.jpg" alt="a happy kid with his dog" />
+                    <div className="col">
+                        <img src="img/happy-kid.jpg" alt="a happy kid with his dog"></img>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <img src="img/happy-man.jpg" alt="a happy man in red shirt" />
+                <div className="row">
+                    <div className="col">
+                        <img src="img/happy-man.jpg" alt="a happy man in red shirt"></img>
                     </div>
-                    <div class="col">
-                        <img src="img/happy-people.jpg" alt="two happy friends" />
+                    <div className="col">
+                        <img src="img/happy-people.jpg" alt="two happy friends"></img>
                     </div>
                 </div>
             </div>
