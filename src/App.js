@@ -50,10 +50,10 @@ function Footer() {
     return (
         <footer>
             <p>
-                &copy; 2021 University of Washington All rights reserved. Contact with
-                <a href="mailto:zhanz1@uw.edu" role="link" aria-label="Zhan's email">Zhan</a>,
-                <a href="mailto:qiaoyi@uw.edu" role="link" aria-label="Whitney's email">Whitney</a>,
-                <a href="mailto:zsun0510@uw.edu" role="link" aria-label="Jerry's email">Jerry</a>
+                &copy; 2021 University of Washington All rights reserved. Contact with 
+                <a href="mailto:zhanz1@uw.edu" role="link" aria-label="Zhan's email"> Zhan</a>,
+                <a href="mailto:qiaoyi@uw.edu" role="link" aria-label="Whitney's email"> Whitney</a>,
+                <a href="mailto:zsun0510@uw.edu" role="link" aria-label="Jerry's email"> Jerry</a>
             </p>
         </footer>
     );

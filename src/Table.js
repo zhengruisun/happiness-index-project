@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 let HIDE_INDEX = [4, 5, 6 ,7];
 
@@ -9,9 +9,9 @@ function TableHeader(props) {
     }
     let headerRow = headers.map((header) => {
         if (HIDE_INDEX.includes(headers.indexOf(header))) {
-            return (<td key={header} className="hide-mobile">{header}</td>);
+            return (<th key={header} className="hide-mobile">{header}</th>);
         } else {
-            return (<td key={header}>{header}</td>);
+            return (<th key={header}>{header}</th>);
         }
     });
     return (
@@ -68,7 +68,8 @@ export function Table(props) {
     let parsedData = [];
     let pageGap = 15;
 
-    let data = props.data.slice(pageNum * pageGap, (pageNum + 1) * pageGap);
+    let data = props.data.slice(1, props.data.length);
+    data = data.slice(pageNum * pageGap, (pageNum + 1) * pageGap);
 
     if (data.length != 0) {
         for (let row of data) {
@@ -82,13 +83,22 @@ export function Table(props) {
         }
     }
  
-    if (props.data.length < 2) {
+    if (data.length < 2) {
         return (
             <div className='table data-table-frame'>
                 <table className='data-table'>
                     <TableHeader headers={headers} />
                 </table>
                 <div className="alerts"><p>No data, please check you input!</p></div> 
+            </div>
+        );
+    } else if (countryCondition !== '') {
+        return (
+            <div className='table data-table-frame'>
+                <table className='data-table'>
+                    <TableHeader headers={headers} />
+                    <TableBody rows={parsedData} countryCondition={props.countryCondition} />
+                </table>
             </div>
         );
     } else {

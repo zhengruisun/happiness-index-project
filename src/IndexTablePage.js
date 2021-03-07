@@ -1,29 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import { Table } from './Table';
 import 'whatwg-fetch';
+import { Dropdown, DropdownToggle, DropdownItem, DropdownMenu } from 'reactstrap';
 
 function YearSelect(props) {
-    let [selectValue, setSelect] = useState('2015');
+    let [isOpen, setOpen] = useState(false);
+    let [selectedValue, setSelection] = useState('2015');
 
     const handleChange = (evt) => {
-        setSelect(evt.target.value);
+        setSelection(evt.target.value);
     }
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        props.callbackFun(selectValue);
+        props.callbackFun(selectedValue);
     }
+
+    const toggleDropdown = () => {
+        setOpen(prevState => !prevState);
+    }
+
+    let selectionList = ['2015', '2016', '2017', '2018', '2019'];
+    selectionList = selectionList.map((elem) => {
+        return <DropdownItem value={elem} onClick={handleChange}>{elem}</DropdownItem>;
+    });
 
     return (
         <form className="select-input" onSubmit={handleSubmit} role="listbox" aria-label="list of selections of areas">
-            <label htmlFor="years"><h3>Select A Year:</h3></label>
-            <select name="years" value={selectValue} onChange={handleChange}>
-                <option value="2015">2015</option>
-                <option value="2016">2016</option>
-                <option value="2017">2017</option>
-                <option value="2018">2018</option>
-                <option value="2019">2019</option>
-            </select>
+            <Dropdown direction="right" isOpen={isOpen} toggle={toggleDropdown} >
+                <DropdownToggle caret color="orange">{selectedValue}</DropdownToggle>
+                <DropdownMenu>
+                    {selectionList}
+                </DropdownMenu>
+            </Dropdown>
+            <br/>
             <button type="submit" className="submit-button">Search</button>
         </form>
     );
@@ -42,14 +52,15 @@ function CountrySelect(props) {
 
     return (
         <form className="text-input" onSubmit={handleSubmit} role="textbox" aria-label="textbox for selecting country for the table">
-            <label htmlFor="country-for-table">
-                <h3>Find A Country:</h3>
-            </label>
-            <p>Get the data from 2015 to 2019.</p>
-            <input type="text" className="country-select"
-                placeholder="Type in a country name" aria-label="country name input" 
-                value={inputValue} onChange={handleChange} />
-            <button type="submit" className="submit-button">Search</button>
+                <label htmlFor="country-for-table">
+                    <h3>Find A Country:</h3>
+                </label>
+                <p>Get the data from {props.year}.</p>
+                <input type="text" className="country-select"
+                    placeholder="Type in a country name" aria-label="country name input" 
+                    value={inputValue} onChange={handleChange} />
+                <br/><br/>
+                <button type="submit" className="submit-button">Search</button>
         </form>
     );
 }
@@ -62,10 +73,11 @@ function LeftSubpage(props) {
                 <p>Click and get the corresponding data visualizations.</p>
             </header>
             <div className="tabcontent table">
-                    <h2>View Data Table</h2>
-                    <YearSelect callbackFun={props.handleYearSubmit} />
-                    <CountrySelect callbackFun={props.handleCountrySubmit} />
-                </div>
+                <h2>View Data Table</h2>
+                <YearSelect callbackFun={props.handleYearSubmit} />
+                <br/>
+                <CountrySelect callbackFun={props.handleCountrySubmit} year={props.year} />
+            </div>
         </section>
     );
 }
@@ -103,7 +115,7 @@ export function IndexTablePage() {
             out.pop();
             setData(out);
         });
-    }, []); 
+    }, [data]); 
 
     const handlePageNumClick = (operation) => {
         let pageGap = 15;
@@ -133,7 +145,7 @@ export function IndexTablePage() {
 
     return (
         <div className="container pages">
-            <LeftSubpage handleYearSubmit={handleYearSubmit} handleCountrySubmit={handleCountrySubmit} />
+            <LeftSubpage handleYearSubmit={handleYearSubmit} handleCountrySubmit={handleCountrySubmit} year={yearState} />
             <MidSubpage countryCondition={countryState} data={data} handlePageNumClick={handlePageNumClick} pageNum={pageNum} />
         </div>
     );

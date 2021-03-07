@@ -221,6 +221,15 @@ h3 {
     font-size: 30px;
 }
 
+.left-subpage input[type=text] {
+    border: 2px solid orange;
+    border-radius: 4px;
+}
+
+.left-subpage input[type=text]:focus {
+    background-color: oldlace;
+}
+
 /* Tab CSS in index for switching */
 .tab {
     overflow: hidden;
@@ -268,7 +277,6 @@ h3 {
    part in index.html, will be deleted once js
    is implemented!! */
 .table {
-    display: none;
     border: none;
 }
 
