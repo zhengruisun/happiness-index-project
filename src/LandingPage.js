@@ -113,9 +113,9 @@ export function LandingData(props) {
 export function LandingInfo(props) {
     return (
         <div>
-            <div class="container center">
-                <div class="row">
-                    <div class="col">
+            <div className="container center">
+                <div className="row">
+                    <div className="col">
                         <h2>
                             Happiness can change, and does change, according to the quality of the society in which
                             people live.
@@ -123,10 +123,10 @@ export function LandingInfo(props) {
                     </div>
                 </div>
             </div>
-            <div class="parts">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
+            <div className="parts">
+                <div className="container">
+                    <div className="row">
+                        <div className="col">
                             <h3>Physical</h3>
                             <p>
                                 Laugh is the most beautiful and natural excercise. According to
@@ -136,7 +136,7 @@ export function LandingInfo(props) {
                                 muscles of the whole body. </p>
     
                         </div>
-                        <div class="col">
+                        <div className="col">
                             <h3>Mental</h3>
                             <p>
                                 Happiness will produce a substance called dopamine. The latest research by
@@ -160,18 +160,18 @@ export function LandingGalary(props) {
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <img src="img/happy-couple.jpg" alt="a happy family">
+                        <img src="img/happy-couple.jpg" alt="a happy family" />
                     </div>
                     <div class="col">
-                        <img src="img/happy-kid.jpg" alt="a happy kid with his dog">
+                        <img src="img/happy-kid.jpg" alt="a happy kid with his dog" />
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <img src="img/happy-man.jpg" alt="a happy man in red shirt">
+                        <img src="img/happy-man.jpg" alt="a happy man in red shirt" />
                     </div>
                     <div class="col">
-                        <img src="img/happy-people.jpg" alt="two happy friends">
+                        <img src="img/happy-people.jpg" alt="two happy friends" />
                     </div>
                 </div>
             </div>
