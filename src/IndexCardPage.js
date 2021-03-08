@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Dropdown, DropdownToggle, DropdownItem, DropdownMenu } from 'reactstrap';
-import {
-    Card, CardText, CardBody,
-    CardTitle, CardSubtitle, Button
-  } from 'reactstrap';
+import { Card, CardText, CardBody, CardTitle, Row, Col, Container } from 'reactstrap';
+import 'whatwg-fetch';
 
-export function IndexCardPage(props) {
-    let [yearState, setYearState] = useState('2015');
+export function IndexCardPage() {
     let [data, setData] = useState([]);
+    let [selection, setSelection] = useState('Switzerland');
 
+    // fetch the data for cards
     useEffect(() => {
-        let url = 'data/' + yearState + '.csv';
+        let url = 'data/2015.csv';
         fetch(url)
         .then(function(response) {
             if (response.ok) {
@@ -28,30 +26,36 @@ export function IndexCardPage(props) {
             out.pop();
             setData(out);
         });
-    }, [data]); 
+        return function cleanup() {};
+    }, []); 
 
-    const handleYearSubmit = (year) => {
-        setYearState(year);
+    const handleSelection = (country) => {
+        setSelection(country);
     }
 
     return (
-        <div class="container pages">
-            <CardLeftSubpage handleYearSubmit={handleYearSubmit} year={yearState}/>
-            <CardMidSubpage data={data}/>
-        </div>
+        <Container className="pages">
+            <CardLeftSubpage />
+            <CardMidSubpage data={data.slice(1, data.length)} handleSelection={handleSelection} />
+            <CardRightSubpage selection={selection} />
+        </Container>
     );
 }
 
-function CardLeftSubpage(props) {
+function CardLeftSubpage() {
     return (
         <section className="left-subpage">
             <CardPageDescription />
-            <YearSelect callbackFun={props.handleYearSubmit}/>
+            <cite className="citation">Data from 
+                <a href="https://www.kaggle.com/unsdsn/world-happiness" aria-label="link for data source from Kaggle">
+                    {' Kaggle: World Happiness Report'}
+                </a>
+            </cite>
         </section>
     );
 }
 
-function CardPageDescription(props) {
+function CardPageDescription() {
     return (
         <div className="tabcontent cards">
             <h2>10 Happiest Countries in the World</h2>
@@ -67,69 +71,130 @@ function CardPageDescription(props) {
     );
 }
 
-function YearSelect(props) {
-    let [isOpen, setOpen] = useState(false);
-    let [selectedValue, setSelection] = useState('2015');
 
-    const handleChange = (evt) => {
-        setSelection(evt.target.value);
+function CardMidSubpage(props) {
+    let data = props.data;
+    let cardRow = [];
+    for (let i = 0; i < 2; i++) {
+        cardRow.push(<CardRow key={'row' + i} data={data.slice(i * 5, i * 5 + 5)} callbackFun={props.handleSelection} />);
     }
-
-    const handleSubmit = (evt) => {
-        evt.preventDefault();
-        props.callbackFun(selectedValue);
-    }
-
-    const toggleDropdown = () => {
-        setOpen(prevState => !prevState);
-    }
-
-    let selectionList = ['2015', '2016', '2017', '2018', '2019'];
-    selectionList = selectionList.map((elem) => {
-        return <DropdownItem value={elem} onClick={handleChange}>{elem}</DropdownItem>;
-    });
-
     return (
-        <form className="select-input" onSubmit={handleSubmit} role="listbox" aria-label="list of selections of areas">
-            <Dropdown direction="right" isOpen={isOpen} toggle={toggleDropdown} >
-                <DropdownToggle caret color="orange">{selectedValue}</DropdownToggle>
-                <DropdownMenu>
-                    {selectionList}
-                </DropdownMenu>
-            </Dropdown>
-            <br/>
-            <button type="submit" className="submit-button">Search</button>
-        </form>
+        <section className='mid-subpage'>
+            <div className='tabcontent cards'>
+                <Container>
+                    {cardRow}
+                </Container>
+            </div>
+        </section>
     );
 }
 
-function CardMidSubpage(props) {
+function CardRow(props) {
+    let data = props.data;
     return (
-        <CountryList data={props.data}/>
+        <Row>
+            {data.map(function (elem) { return <CountryCard callbackFun={props.callbackFun} key={elem[0]} data={elem} />; })}
+        </Row>
     );
 }
 
 function CountryCard(props) {
     return (
-        <div>
-         <Card>
-        <CardBody>
-          <CardTitle tag="h5">Card title</CardTitle>
-          <CardSubtitle tag="h6" className="mb-2 text-muted">Card subtitle</CardSubtitle>
-          <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-          <Button>View More</Button>
-        </CardBody>
-      </Card>
-        </div>
+        <Col key={props[0]}>
+            <Card>
+                <CardBody>
+                    <CardTitle tag="h3">{props.data[0]}</CardTitle>
+                    <CardText>
+                        Happiness Rank: {props.data[1]} <br/>
+                        Happiness Index: {props.data[2]}
+                    </CardText>
+                    <button className="submit-button" onClick={() => { props.callbackFun(props.data[0]); }}>View More</button>
+                </CardBody>
+            </Card>
+        </Col>
     );
 }
 
-function CountryList(props) {
-    let data = Object.entries(props.data);
-    let countryCards = data.map((country) => {
-        return  <CountryCard key={country[0]} data={country} />
-    });
-    return (
-        {countryCards}
-    );
+function CardRightSubpage(props) {
+    let countrySelection = props.selection;
+    let [countryImage, setImage] = useState('');
+    let [countryInfo, setInfo] = useState('');
+    let [error, setError] = useState(false);
+
+    // fetch url for country's flag
+    useEffect(() => {
+        let unmounted = false;
+        let url = "https://en.wikipedia.org/w/api.php?origin=*&action=query&prop=pageimages&piprop=original&format=json&titles=" + countrySelection.replace(' ', '%20');
+
+        fetch(url)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(imgUrl) {
+            if (!unmounted) {
+                setImage(imgUrl.query.pages[Object.keys(imgUrl.query.pages)].original.source);
+            }
+        })
+        .catch(function() {
+            if (!unmounted) {
+                setError('Fail to load Image.');
+            }
+        });
+        return function cleanup() { unmounted = true; };
+    }, [countrySelection]);
+
+    // fetch url for country's information
+    useEffect(() => {
+        let unmounted = false;
+        let url = "https://en.wikipedia.org/w/api.php?origin=*&format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=" + countrySelection.replace(' ', '%20');
+
+        fetch(url)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(result) {
+            if (!unmounted) {
+                setInfo(result.query.pages[Object.keys(result.query.pages)].extract.replace(/([.?!])\s*(?=[A-Z])/g, "$1|").split("|").slice(0, 6).join(' '));
+            }
+        })
+        .catch(function() {
+            if (!unmounted) {
+                setError('Fail to load Intro.');
+            }
+        });
+        return function cleanup() { unmounted = true; };
+    }, [countrySelection]);
+
+    // report error if there is one
+    if (!error) {
+        return (
+            <section className='right-subpage'>
+                <h2>Country Information</h2>
+                    <cite className="citation">
+                        Data from 
+                        <a href="https://en.wikipedia.org/wiki/Main_Page" aria-label="link to data source from wikipedia">
+                            {' Wikipedia'}
+                        </a>
+                    </cite>
+                    <form method="GET" action="https://en.wikipedia.org/w/api.php" aria-label="search from Wiki">
+                        <div><img src={countryImage} alt={countrySelection + "'s flag"}></img></div>
+                        <div><p>{countryInfo}</p></div>
+                    </form>
+            </section>
+        );
+    } else {
+        return (
+            <section className='right-subpage'>
+                <h2>Country Information</h2>
+                    <cite className="citation">
+                        Data from 
+                        <a href="https://en.wikipedia.org/wiki/Main_Page" aria-label="link to data source from wikipedia">
+                            Wikipedia
+                        </a>
+                    </cite>
+                    <div className="alerts"><p>{error}</p></div>
+            </section>
+        );
+    }
+    
 }

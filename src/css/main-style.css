@@ -114,11 +114,9 @@ button:hover span:after {
 }
 
 .row button {
-    width: 200px;
+    width: 150px;
     font-size: 18px;
     padding: 10px;
-    margin-top: 2rem;
-    margin-bottom: 3rem;
 }
 
 /* General heading guidelines and certain class behaviors */
@@ -373,7 +371,7 @@ h3 {
     }
 
     .galary img {
-        width: 100%;
+        width: 95%;
         height: auto;
         margin: 10px;
     }
@@ -384,7 +382,7 @@ h3 {
     }
 }
 
-@media (max-width: 666px) {
+@media (max-width: 712px) {
     /* Special for phones */
     /* General changings */
     h1 {
@@ -437,5 +435,15 @@ h3 {
     .right-subpage {
         width: 100%;
         flex-basis: 0px;
+    }
+}
+
+@media (max-width:465px) {
+    .container {
+        display: list-item;
+    }
+
+    .hide-small {
+        display: none;
     }
 }

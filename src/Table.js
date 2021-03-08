@@ -1,12 +1,13 @@
 import React from 'react';
 
-let HIDE_INDEX = [4, 5, 6 ,7];
-
 function TableHeader(props) {
     let headers = props.headers;
-    if (headers == undefined) {
+    let HIDE_INDEX = [3, 4, 5, 6 ,7];
+    // handle if the props passed is empty
+    if (headers === undefined) {
         headers = [];
     }
+
     let headerRow = headers.map((header) => {
         if (HIDE_INDEX.includes(headers.indexOf(header))) {
             return (<th key={header} className="hide-mobile">{header}</th>);
@@ -14,6 +15,7 @@ function TableHeader(props) {
             return (<th key={header}>{header}</th>);
         }
     });
+
     return (
         <thead>
             <tr>
@@ -25,6 +27,7 @@ function TableHeader(props) {
 
 function TableRow(props) {
     let row = props.row;
+    let HIDE_INDEX = [3, 4, 5, 6 ,7];
     row = row.map((elem) => {
         if (HIDE_INDEX.includes(row.indexOf(elem))) {
             return (<td className="hide-mobile" key={elem}>{elem}</td>);
@@ -71,7 +74,7 @@ export function Table(props) {
     let data = props.data.slice(1, props.data.length);
     data = data.slice(pageNum * pageGap, (pageNum + 1) * pageGap);
 
-    if (data.length != 0) {
+    if (data.length !== 0) {
         for (let row of data) {
             if (countryCondition !== '') {
                 if (row[0] === countryCondition) {
@@ -83,7 +86,7 @@ export function Table(props) {
         }
     }
  
-    if (data.length < 2) {
+    if (parsedData.length < 1) {
         return (
             <div className='table data-table-frame'>
                 <table className='data-table'>
