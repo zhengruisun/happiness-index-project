@@ -107,8 +107,10 @@ function CountryCard(props) {
                 <CardBody>
                     <CardTitle tag="h3">{props.data[0]}</CardTitle>
                     <CardText>
-                        Happiness Rank: {props.data[1]} <br/>
-                        Happiness Index: {props.data[2]}
+                        Happiness Rank: 
+                        {props.data[1]} <br/>
+                        Happiness Index: 
+                        {props.data[2]}
                     </CardText>
                     <button className="submit-button" onClick={() => { props.callbackFun(props.data[0]); }}>View More</button>
                 </CardBody>
