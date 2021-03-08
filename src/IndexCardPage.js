@@ -93,7 +93,9 @@ function CardRow(props) {
     let data = props.data;
     return (
         <Row>
-            {data.map(function (elem) { return <CountryCard callbackFun={props.callbackFun} key={elem[0]} data={elem} />; })}
+            {data.map(function (elem) {
+                return <CountryCard callbackFun={props.callbackFun} key={elem[0]} data={elem} />; 
+            })}
         </Row>
     );
 }
