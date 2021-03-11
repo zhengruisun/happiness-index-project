@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom'
-import { Container, Row, Col } from 'reactstrap';
+import { UncontrolledCarousel, Container, Row, Col } from 'reactstrap';
+
 
 export function LandingPage() {
     return (
@@ -132,28 +133,48 @@ function LandingDescription() {
 }
 
 function LandingGalary() {
+    const items = [
+        {
+          src: "img/happy-couple.jpg",
+          altText: "Slide 1",
+          caption: "",
+          header: "",
+          key: "1"
+        },
+        {
+        src: "img/happy-kid.jpg",
+        altText: "Slide 2",
+    caption: "",
+    header: "",
+    key: "2"
+
+        },
+        {
+         src: "img/happy-man.jpg",
+         altText: "Slide 3",
+         caption: "",
+         header: "",
+         key: "3"
+        },
+        {
+            src: "img/happy-people.jpg",
+            altText: "Slide 4",
+            caption: "",
+            header: "",
+            key: "4",
+        }
+      ];
     return (
         <section className="galary center">
             <Container>
                 <h2>Happiness Galary</h2>
             </Container>
             <Container>
-                <Row>
-                    <Col>
-                        <img src="img/happy-couple.jpg" alt="a happy family"/>
-                    </Col>
-                    <Col>
-                        <img src="img/happy-kid.jpg" alt="a happy kid with his dog"/>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <img src="img/happy-man.jpg" alt="a happy man in red shirt"/>
-                    </Col>
-                    <Col>
-                        <img src="img/happy-people.jpg" alt="two happy friends"/>
-                    </Col>
-                </Row>
+            <Row>
+    <Col md="8" className="mx-auto">
+      <UncontrolledCarousel items={items} />
+    </Col>
+  </Row>
             </Container>
         </section>
     );
