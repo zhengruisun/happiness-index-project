@@ -21,7 +21,7 @@ function IntroText() {
                     <Row>
                         <Col>
                             <Row>
-                                <h1>Welcome to The World Happiness Analysis</h1>
+                                <h1>Welcome to The World Happiness Data Analysis</h1>
                             </Row>
                             <Row>
                                 <h2>
@@ -40,10 +40,9 @@ function IntroText() {
                             
                                 <Row>
                                     <p>People will gain a better insight
-                                        on the correlation between happiness indices
+                                        on the correlation between happiness scores
                                         and different factors of the country, so
-                                        that
-                                        they can publish their studies or take actions accordingly.
+                                        that they can publish their studies or take actions accordingly.
                                     </p>
                                 </Row>
                             </div>
@@ -77,7 +76,7 @@ function LandingData() {
                             <p>Countries with Happiness Index</p>
                         </Col>
                         <Col>
-                            <p>7 Billion +</p>
+                            <p>7 Billions +</p>
                             <p>Individuals from the World</p>
                         </Col>
                         <Col>
@@ -97,8 +96,8 @@ function LandingDescription() {
             <Container className="center">
                 <Row>
                     <Col>
-                        <h2>Happiness can change, and does change, according to the quality of the society in which
-                            people live.
+                        <h2>"Happiness can change, and does change, according to the quality of the society in which
+                            people live"
                         </h2>
                     </Col>
                 </Row>

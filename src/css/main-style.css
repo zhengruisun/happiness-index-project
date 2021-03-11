@@ -7,9 +7,8 @@
 
 body {
     width: 100%;
-    height: 100vh;
-    background: #22c1c3; 
-    background: linear-gradient(to left, #22c1c3, #fdbb2d); 
+    height: 100vh; 
+    background: linear-gradient(to right, #00C9FF, #92FE9D); 
 }
 
 footer {
@@ -40,7 +39,7 @@ nav {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #fdbb2d;
+    background-color: #03b2e2;
     padding: .5rem;
     align-items: center;
     justify-content: space-between;
@@ -74,7 +73,7 @@ nav {
 
 /* Button CSS for all */
 button {
-    background-color:  #f57c00;
+    background-color:  #ffaf04;
     text-align: center;
     font-size: 15px;
     padding: 8px;
@@ -158,7 +157,7 @@ h3 {
 }
 
 .data {
-    color: darkgreen;
+    color: rgb(0, 22, 82);
     font-size: 20px;
     font-weight: 800;
 }
@@ -220,7 +219,7 @@ h3 {
 }
 
 .left-subpage input[type=text] {
-    border: 2px solid orange;
+    border: 2px solid rgb(0, 174, 255);
     border-radius: 4px;
 }
 
@@ -231,8 +230,8 @@ h3 {
 /* Tab CSS in index for switching */
 .tab {
     overflow: hidden;
-    border: 1px solid #f57c00;
-    background-color:#f57c00;
+    border: 1px solid rgb(0, 174, 255);
+    background-color:rgb(0, 174, 255);
     display: flex;
     width: fit-content;
 }
@@ -313,7 +312,7 @@ h3 {
 }
 
 .data-table th {
-    background-color: #f57c00;
+    background-color:rgb(0, 174, 255);
     color: white;
 }
 
