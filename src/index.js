@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import firebase from 'firebase/app'
 
 import './css/main-style.css';
-var firebaseConfig = {
+const firebaseConfig = {
     apiKey: "AIzaSyAKoCg88TZcBL4Rfl_7pDhE8pn_DfQhHEQ",
     authDomain: "project-2-zhanz1-6dbd8.firebaseapp.com",
     projectId: "project-2-zhanz1-6dbd8",
@@ -14,8 +14,8 @@ var firebaseConfig = {
     messagingSenderId: "433935427896",
     appId: "1:433935427896:web:dc93ecee6cd918f57639cd",
     measurementId: "G-JDB4WJ7K3N"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
 ReactDOM.render(<BrowserRouter><App /></BrowserRouter>, document.getElementById('root'));

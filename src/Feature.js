@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Dropdown, DropdownToggle, DropdownItem, DropdownMenu } from 'reactstrap';
+import { Route, Switch, NavLink } from 'react-router-dom';
+
 
 // Dropdown menu for selecting year
 export function YearSelect(props) {
@@ -63,5 +65,37 @@ export function CountrySelect(props) {
                 <br/><br/>
                 <button type="submit" className="submit-button">Search</button>
         </form>
+    );
+}
+
+export function NavBar() {
+    return (
+        <section>
+            <nav className="fixed-top">
+                <div className="nav-left">
+                    <span className="logo" aria-hidden="true">&nbsp;</span><b className="hide-mobile">World Happiness</b>
+                    <NavLink className="nav-text" exact to="/">Home</NavLink>
+                    <NavLink className="nav-text" to="/cards">DataCards</NavLink>
+                    <NavLink className="nav-text" to="/table">DataTable</NavLink>
+                </div>
+                <div className="nav-right">
+                    <NavLink className="hide-small" to='/'><button aria-label="button for sign up"><span>Sign Up</span></button></NavLink>
+                    <NavLink to='/'><button aria-label="button for log in"><span>Log In</span></button></NavLink>
+                </div>
+            </nav>
+        </section>
+    );
+}
+
+export function Footer() {
+    return (
+        <footer>
+            <p>
+                &copy; 2021 University of Washington All rights reserved. Contact with 
+                <a href="mailto:zhanz1@uw.edu" aria-label="Zhan's email"> Zhan</a>,
+                <a href="mailto:qiaoyi@uw.edu" aria-label="Whitney's email"> Whitney</a>,
+                <a href="mailto:zsun0510@uw.edu" aria-label="Jerry's email"> Jerry</a>
+            </p>
+        </footer>
     );
 }
