@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Dropdown, DropdownToggle, DropdownItem, DropdownMenu } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
-
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 
 // Dropdown menu for selecting year
 export function YearSelect(props) {
