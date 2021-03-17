@@ -78,8 +78,8 @@ export function NavBar() {
                     <NavLink className="nav-text" to="/table">DataTable</NavLink>
                 </div>
                 <div className="nav-right">
-                    <NavLink className="hide-small" to='/login'><button aria-label="button for sign up"><span>Sign Up</span></button></NavLink>
-                    <NavLink to='/login'><button aria-label="button for log in"><span>Log In</span></button></NavLink>
+                    <NavLink className="hide-small" to='/login'><button aria-label="button for sign up">Sign Up</button></NavLink>
+                    <NavLink to='/login'><button aria-label="button for log in">Log In</button></NavLink>
                 </div>
             </nav>
         </section>

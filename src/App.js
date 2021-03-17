@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import { LandingPage } from './LandingPage';
@@ -8,8 +8,6 @@ import { NavBar, Footer } from './Feature';
 import { LoginForm } from './LoginForm';
 
 export function App() {
-    let [user, setUser] = useState('');
-
     return (
         <div>
             <NavBar />
@@ -19,7 +17,7 @@ export function App() {
                     <Route exact path="/landing" component={LandingPage} />
                     <Route exact path="/table" component={IndexTablePage} />
                     <Route exact path="/cards" component={IndexCardPage} />
-                    <Route exact path="/login" component={() => { return <LoginForm hasUser={user} setUser={setUser} />; }} />
+                    <Route exact path="/login" component={LoginForm} />
                 </Switch>
             </main>
             <Footer />

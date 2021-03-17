@@ -174,16 +174,16 @@ function CardRightSubpage(props) {
         return (
             <section className='right-subpage'>
                 <h2>Country Information</h2>
+                    <form method="GET" action="https://en.wikipedia.org/w/api.php" aria-label="search from Wiki">
+                        <div><img src={countryImage} alt={countrySelection + "'s flag"}></img></div>
+                        <div><p>{countryInfo}</p></div>
+                    </form>
                     <cite className="citation">
                         Data from 
                         <a href="https://en.wikipedia.org/wiki/Main_Page" aria-label="link to data source from wikipedia">
                             {' Wikipedia'}
                         </a>
                     </cite>
-                    <form method="GET" action="https://en.wikipedia.org/w/api.php" aria-label="search from Wiki">
-                        <div><img src={countryImage} alt={countrySelection + "'s flag"}></img></div>
-                        <div><p>{countryInfo}</p></div>
-                    </form>
             </section>
         );
     } else {
