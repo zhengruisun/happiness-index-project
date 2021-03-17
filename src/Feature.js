@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Dropdown, DropdownToggle, DropdownItem, DropdownMenu } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 
 // Dropdown menu for selecting year
 export function YearSelect(props) {
@@ -79,8 +78,8 @@ export function NavBar() {
                     <NavLink className="nav-text" to="/table">DataTable</NavLink>
                 </div>
                 <div className="nav-right">
-                    <NavLink className="hide-small" to='/'><button aria-label="button for sign up"><span>Sign Up</span></button></NavLink>
-                    <NavLink to='/'><button aria-label="button for log in"><span>Log In</span></button></NavLink>
+                    <NavLink className="hide-small" to='/login'><button aria-label="button for sign up"><span>Sign Up</span></button></NavLink>
+                    <NavLink to='/login'><button aria-label="button for log in"><span>Log In</span></button></NavLink>
                 </div>
             </nav>
         </section>
