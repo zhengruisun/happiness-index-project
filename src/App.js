@@ -1,4 +1,4 @@
-import { React } from 'react';
+import { React, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import { LandingPage } from './LandingPage';
@@ -8,6 +8,9 @@ import { NavBar, Footer } from './Feature';
 import { LoginForm } from './LoginForm';
 
 export function App() {
+    let [country, setMainCountry] = useState(undefined);
+    console.log(country);
+
     return (
         <div>
             <NavBar />
@@ -16,8 +19,8 @@ export function App() {
                     <Route exact path="/" component={LandingPage} />
                     <Route exact path="/landing" component={LandingPage} />
                     <Route exact path="/table" component={IndexTablePage} />
-                    <Route exact path="/cards" component={IndexCardPage} />
-                    <Route exact path="/login" component={LoginForm} />
+                    <Route exact path="/cards" component={() => { return <IndexCardPage country={country} />; }} />
+                    <Route exact path="/login" component={() => { return <LoginForm callbackFunc={setMainCountry} />; }} />
                 </Switch>
             </main>
             <Footer />

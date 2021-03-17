@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardText, CardBody, CardTitle, Row, Col, Container } from 'reactstrap';
 import 'whatwg-fetch';
 
-export function IndexCardPage() {
+export function IndexCardPage(props) {
     let [data, setData] = useState([]);
-    let [selection, setSelection] = useState('Switzerland');
+    let [selection, setSelection] = useState(props.country || 'Switzerland');
 
     // fetch the data for cards
     useEffect(() => {
