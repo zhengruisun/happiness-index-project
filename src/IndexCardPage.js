@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardText, CardBody, CardTitle, Row, Col, Container } from 'reactstrap';
+import firebase from 'firebase/app';
 import 'whatwg-fetch';
 
 export function IndexCardPage(props) {
@@ -33,19 +34,43 @@ export function IndexCardPage(props) {
         setSelection(country);
     }
 
-    return (
-        <Container className="pages">
-            <CardLeftSubpage />
-            <CardMidSubpage data={data.slice(1, data.length)} handleSelection={handleSelection} />
-            <CardRightSubpage selection={selection} />
-        </Container>
-    );
+    if (props.country === undefined && props.country === null) {
+        return (
+            <Container className="pages">
+                <CardLeftSubpage />
+                <CardMidSubpage data={data.slice(1, data.length)} handleSelection={handleSelection} />
+                <CardRightSubpage selection={selection} />
+            </Container>
+        );
+    } else {
+        return (
+            <Container className="pages">
+                <CommentLeftSubpage />
+                <CommentMidSubpage country={props.country} />
+                <CardRightSubpage selection={selection} />
+            </Container>
+        );
+    }
+
 }
 
 function CardLeftSubpage() {
     return (
         <section className="left-subpage">
             <CardPageDescription />
+            <cite className="citation">Data from 
+                <a href="https://www.kaggle.com/unsdsn/world-happiness" aria-label="link for data source from Kaggle">
+                    {' Kaggle: World Happiness Report'}
+                </a>
+            </cite>
+        </section>
+    );
+}
+
+function CommentLeftSubpage() {
+    return (
+        <section className="left-subpage">
+            <CommentDescription />
             <cite className="citation">Data from 
                 <a href="https://www.kaggle.com/unsdsn/world-happiness" aria-label="link for data source from Kaggle">
                     {' Kaggle: World Happiness Report'}
@@ -68,6 +93,84 @@ function CardPageDescription() {
                 there is not a clear correlation between people's trust in governments and a country's happiness score.
             </p>
         </div>
+    );
+}
+
+function CommentDescription() {
+    return (
+        <div className="tabcontent cards">
+            <h2>Comments</h2>
+            <p>
+                blablabla
+            </p>
+            <p> 
+                blablabla
+            </p>
+        </div>
+    );
+}
+
+function CommentMidSubpage(props) {
+    let [comments, setComments] = useState({});
+    let country = props.country;
+
+    useEffect(() => {
+        const message = firebase.database().ref('comments').child(country);
+        const listener = message.on('value', (snapshot) => {
+            setComments(snapshot.val());
+        });
+        return function cleanup() {
+            message.off('value', listener);
+        }
+    }, [comments, country]);
+
+    if (comments.size === 0) {
+        return (
+            <section className='mid-subpage'>
+                <div className='tabcontent cards'>
+                    <p>There is no comments.</p>
+                </div>
+            </section>
+        );
+    }
+    let output = [];
+    let id = 0;
+    
+    for (let key in comments) {
+        output.push(
+            <Row key={id}>
+                <Col>
+                    <CommentCard userName={comments[key].userName} comment={comments[key].comment} />
+                </Col>
+            </Row>
+        );
+        id += 1;
+        if (id >= 9) {
+            break
+        }
+    }
+
+    return (
+        <section className='mid-subpage'>
+            <div className='tabcontent cards'>
+                <Container>
+                    {output}
+                </Container>
+            </div>
+    </section>
+    );
+}
+
+function CommentCard(props) {
+    return (
+        <Card>
+            <CardBody>
+                <CardTitle tag="h3">{props.userName}</CardTitle>
+                <CardText>
+                    {props.comment}
+                </CardText>
+            </CardBody>
+        </Card>
     );
 }
 

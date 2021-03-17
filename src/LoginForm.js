@@ -23,18 +23,36 @@ const uiConfig = {
 export function LoginForm(props) {
     let [isLoading, setLoading] = useState(true);
     let [user, setUser] = useState(undefined);
-    let [dbLoading, setdbLoading] = useState(true);
     let [userCountry, setUserCountry] = useState('');
     let [userPost, setUserPost] = useState('');
-    
+    let [dbLoading, setdbLoading] = useState(true);
+
     const handleCountryChange = (evt) => {
-        setUserCountry(evt.target.value)
+        setUserCountry(evt.target.value);
     }
 
     const handleCountrySubmit = (evt) => {
         evt.preventDefault();
         const message = firebase.database().ref('users').child(user.uid);
         message.set(userCountry);
+    }
+
+    const handlePostChange = (evt) => {
+        setUserPost(evt.target.value);
+    }
+
+    const handlePostSubmit = (evt) => {
+        evt.preventDefault();
+        if (userCountry !== '' && userCountry !== null) {
+            const message = firebase.database().ref('comments').child(userCountry);
+            const addItem = {
+                userID: user.uid,
+                userName: user.displayName,
+                comment: userPost
+            };
+            message.push(addItem);
+        }
+        setUserPost('');
     }
 
     useEffect(() => {
@@ -52,17 +70,19 @@ export function LoginForm(props) {
         }
     }, []);
 
-
     useEffect(() => {
         if (user) {
             const message = firebase.database().ref('users').child(user.uid);
-            message.on('value', (snapshot) => {
+            const listener = message.on('value', (snapshot) => {
                 setUserCountry(snapshot.val());
                 setdbLoading(false);
                 props.callbackFunc(snapshot.val());
             });
+            return function cleanup() {
+                message.off('value', listener);
+            }
         }
-    }, [user]);
+    }, [user, props]);
 
     const handleLogOut = () => {
         firebase.auth().signOut();
@@ -82,31 +102,46 @@ export function LoginForm(props) {
     }
 
     if (user !== undefined) {
-    return (
-            <div className="login">
-                <h1>Welcome!{" " + user.displayName}</h1>
-                {countryContent}
-                <form className="text-input" onSubmit={handleCountrySubmit} role="textbox" aria-label="textbox for selecting country for the table">
-                    <label htmlFor="country-for-table">
-                        <h3>Country:</h3>
-                    </label>
-                    <input type="text" className="country-select"
-                        placeholder="Type in a country name" aria-label="country name input" 
-                        value={userCountry || ''} onChange={handleCountryChange} />
-                <br/>
-                <button type="submit" className="submit-button">Submit</button>
-                </form>
-                <br/>
-                <button aria-label="button for sign out" className="submit-button" onClick={handleLogOut}>Sign Out</button>
-            </div>
-        );
-    } else {
         return (
-            <div className="login">
-                <h1>Sign Up or Log in!</h1>
-                <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
-            </div>
-        )
-    }
+                <section>
+                    <div className="login">
+                        <h1>Welcome!{" " + user.displayName}</h1>
+                        {countryContent}
+                        <form className="text-input" onSubmit={handleCountrySubmit} role="textbox" aria-label="textbox for selecting country for the table">
+                            <label htmlFor="country-for-account">
+                                <h2>Country:</h2>
+                            </label>
+                            <input type="text" className="country-select" id="country-for-account"
+                                placeholder="Type in a country name" aria-label="country name input" 
+                                value={userCountry || ''} onChange={handleCountryChange} />
+                            <br/>
+                            <button type="submit" className="submit-button" aria-label="submit button">Submit</button>
+                        </form>
+                        <br/>
+                        <form className="text-input" onSubmit={handlePostSubmit} role="textbox" aria-label="textbox for submitting comments">
+                            <label htmlFor="comments-for-countries">
+                                <h2>Comments:</h2>
+                            </label><br/>
+                            <textarea type="text" className="comments" id="comments-for-countries"
+                                placeholder="Type your comments after submitting you country" aria-label="comments input" 
+                                value={userPost} onChange={handlePostChange} />
+                            <br/><br/>
+                            <button type="submit" className="submit-button" aria-label="submit button">Submit</button>
+                        </form>
+                        <br/>
+                        <button aria-label="button for sign out" className="submit-button" onClick={handleLogOut}>Sign Out</button>
+                    </div>
+                </section>
+            );
+        } else {
+            return (
+                <section>
+                    <div className="login">
+                        <h1>Sign Up or Log in!</h1>
+                        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+                    </div>
+                </section>
+            )
+        }
 }
 
