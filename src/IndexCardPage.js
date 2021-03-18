@@ -34,7 +34,7 @@ export function IndexCardPage(props) {
         setSelection(country);
     }
 
-    if (props.country === undefined && props.country === null) {
+    if (props.country === undefined || props.country === null) {
         return (
             <Container className="pages">
                 <CardLeftSubpage />
@@ -124,7 +124,7 @@ function CommentMidSubpage(props) {
         }
     }, [comments, country]);
 
-    if (comments.size === 0) {
+    if (comments && comments.size === 0) {
         return (
             <section className='mid-subpage'>
                 <div className='tabcontent cards'>

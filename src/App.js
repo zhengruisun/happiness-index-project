@@ -40,7 +40,7 @@ export function App() {
         }
     }, [user]);
 
-    if (isLoading) {
+    if (isLoading && country !== undefined) {
         return (
             <div>
                 <NavBar />
