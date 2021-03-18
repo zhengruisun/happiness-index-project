@@ -124,7 +124,7 @@ function CommentMidSubpage(props) {
         }
     }, [comments, country]);
 
-    if (comments && comments.size === 0) {
+    if (!comments) {
         return (
             <section className='mid-subpage'>
                 <div className='tabcontent cards'>
