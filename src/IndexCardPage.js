@@ -101,11 +101,10 @@ function CommentDescription() {
         <div className="tabcontent cards">
             <h2>Comments</h2>
             <p>
-                blablabla
+            You can login to your account and select a country. Then you can leave comments about your unique experience with this country.
             </p>
             <p> 
-                blablabla
-            </p>
+            And also you can see other people's comments about this country. Here you can find people with various perspectives, such as native people and tourists. By readings these comments, hope you will have a better insight about this country.            </p>
         </div>
     );
 }
@@ -138,21 +137,18 @@ function CommentMidSubpage(props) {
     
     for (let key in comments) {
         output.push(
-            <Row key={id}>
-                <Col>
-                    <CommentCard userName={comments[key].userName} comment={comments[key].comment} />
-                </Col>
-            </Row>
+                <Row key={id}>
+                    <Col>
+                        <CommentCard userName={comments[key].userName} comment={comments[key].comment} />
+                    </Col>
+                </Row>
         );
         id += 1;
-        if (id >= 9) {
-            break
-        }
     }
 
     return (
         <section className='mid-subpage'>
-            <div className='tabcontent cards'>
+            <div className='tabcontent cards comment-cards'>
                 <Container>
                     {output}
                 </Container>
@@ -261,7 +257,7 @@ function CardRightSubpage(props) {
         })
         .then(function(result) {
             if (!unmounted) {
-                setInfo(result.query.pages[Object.keys(result.query.pages)].extract.replace(/([.?!])\s*(?=[A-Z])/g, "$1|").split("|").slice(0, 6).join(' '));
+                setInfo(result.query.pages[Object.keys(result.query.pages)].extract.replace(/([.?!])\s*(?=[A-Z])/g, "$1|").split("|").slice(0, 7).join(' '));
             }
         })
         .catch(function() {

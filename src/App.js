@@ -51,6 +51,7 @@ export function App() {
             </div>
         );
     }
+
     return (
         <div>
             <NavBar />

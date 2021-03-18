@@ -256,6 +256,12 @@ h3 {
     font-size: 25px;
 }
 
+.comment-cards .container {
+    display: list-item;
+    list-style-type: none;
+    width: 100%;
+}
+
 /* This is used for not showing incomplete tab
    part in index.html, will be deleted once js
    is implemented!! */
